@@ -1,7 +1,6 @@
 fun main() {
-  val dog = Dog("イヌ")
-  dog.showName()
-  dog.cries()
+  val greeter = GreeterImpl()
+  greeter.hello()
 }
 
 fun ifExample(num: Int) {
@@ -56,7 +55,7 @@ fun humanExample() {
 }
 
 /**
- * 継承
+ * Inheritance
  *
  * KotlinはJavaと違いデフォルトのclassでは継承ができない。
  *
@@ -81,12 +80,37 @@ class Dog(name: String): Animal(name) {
 }
 
 /**
- * シールドクラス
+ * Sealed Classes
  *
  * 継承する対象が制限されたclass。
  * シールドクラスは他ファイルから継承ができない。(=同一ファイル内であれば継承可能)
  *
  */
 sealed class Platform {
+  abstract fun showName()
+}
 
+class AndroidPlatform: Platform() {
+  override fun showName() {
+    println("Android.")
+  }
+}
+
+class IosPlatform: Platform() {
+  override fun showName() {
+    println("iOS.")
+  }
+}
+
+/**
+ * Interfaces
+ */
+interface Greeter {
+  fun hello()
+}
+
+class GreeterImpl: Greeter {
+  override fun hello() {
+    println("Hello, GreeterImpl")
+  }
 }
