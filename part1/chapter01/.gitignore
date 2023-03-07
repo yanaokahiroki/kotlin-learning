@@ -1,5 +1,5 @@
-.DS_STORE
-chapter01.iml
+.DS_Store
+./chapter01.iml
 
 .gradle
 build/
