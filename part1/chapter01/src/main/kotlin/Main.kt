@@ -1,5 +1,5 @@
 fun main() {
-  mapExample()
+  setExample()
 }
 
 fun ifExample(num: Int) {
@@ -161,4 +161,23 @@ fun mapExample() {
   val mutableMap: MutableMap<Int, String> = mutableMapOf(1 to "one", 2 to "two", 3 to "three")
   mutableMap[4] = "four"
   println(mutableMap)
+}
+
+/**
+ * Collections.Set
+ *
+ * ListやMap同様、setOfメソッドでインスタンスを生成できる
+ * また同様にMutableSetメソッドでミュータブルなSetになる
+ *
+ */
+fun setExample() {
+  val set: Set<String> = setOf("one", "two", "three")
+  println(set)
+
+  println(set.contains("three"))
+  println(set.contains("four"))
+
+  val mutableSet: MutableSet<String> = mutableSetOf("one", "two", "three")
+  mutableSet.add("four")
+  println(mutableSet)
 }
