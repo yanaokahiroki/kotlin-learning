@@ -1,6 +1,5 @@
 fun main() {
-  val greeter = GreeterImpl()
-  greeter.hello()
+  listExample()
 }
 
 fun ifExample(num: Int) {
@@ -113,4 +112,27 @@ class GreeterImpl: Greeter {
   override fun hello() {
     println("Hello, GreeterImpl")
   }
+}
+
+/**
+ * Collections.List
+ *
+ * listOfは型推論が効くので型引数<code><><code>を省略できる
+ * List型はRead Only(イミュータブル)なので後から要素を追加、削除ができない
+ * 上記のような操作を行う場合にはMutableList型でListを作成する
+ * 作成にはmutableListOfを使う
+ *
+ */
+fun listExample() {
+  val intList: List<Int> = listOf(1, 2, 3)
+  println(intList)
+  println(intList[1])
+
+  val stringList: List<String> = listOf("one", "two", "three")
+  println(stringList)
+  println(stringList[1])
+
+  val mutableList: MutableList<Int>  = mutableListOf(1, 2, 3)
+  mutableList.add(4)
+  println(mutableList)
 }
