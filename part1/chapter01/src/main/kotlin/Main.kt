@@ -1,5 +1,5 @@
 fun main() {
-  listExample()
+  mapExample()
 }
 
 fun ifExample(num: Int) {
@@ -135,4 +135,30 @@ fun listExample() {
   val mutableList: MutableList<Int>  = mutableListOf(1, 2, 3)
   mutableList.add(4)
   println(mutableList)
+}
+
+/**
+ * Collections.Map
+ *
+ * mapOfメソッドはList型のlistOfメソッド同様に型推論が効くので型引数を省略できる
+ * <code>key to value<code>の形式で定義できる
+ * Map型はイミュータブル、MutableMap型はミュータブル
+ *
+ * 追加するときはputよりも直接要素を指定して追加できる
+ * △: mutableMap.put(4, "four")
+ * ○: mutableMap[4] = "four"
+ *
+ *
+ */
+fun mapExample() {
+  val map: Map<Int, String> = mapOf(1 to "one", 2 to "two", 3 to "three")
+  println(map)
+  println(map[2])
+
+  println(map.containsKey(3))
+  println(map.containsKey(4))
+
+  val mutableMap: MutableMap<Int, String> = mutableMapOf(1 to "one", 2 to "two", 3 to "three")
+  mutableMap[4] = "four"
+  println(mutableMap)
 }
