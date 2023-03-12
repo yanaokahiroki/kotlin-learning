@@ -1,5 +1,5 @@
 fun main() {
-  user()
+  dataClass()
 }
 
 /**
@@ -145,4 +145,31 @@ fun user(){
   user4.name = "Test4"
   println(user4.name) // Test4
   println(user4.isValidName)
+}
+
+
+/**
+ * Data Class
+ *
+ * クラス名の前にdata classをつけるだけでデータクラスになる
+ * これだけで下記の関数が使える
+ *
+ * * getter, setter(val定義ならgetterのみ)
+ * * equals
+ * * hashCode
+ * * toString
+ * * componentN
+ * * copy
+ *
+ */
+data class User7(val id: Int, var name: String)
+
+fun dataClass() {
+  val user7 = User7(1, "Test1")
+  user7.name = "Kotlin"
+  println(user7.name)
+
+  val user = User7(2, "Test")
+  val copyUser = user.copy(id = 3, name = "Copied")
+  println(copyUser.toString())
 }
