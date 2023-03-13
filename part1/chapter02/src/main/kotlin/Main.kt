@@ -1,8 +1,9 @@
 fun main() {
-  printUserInfo(1)
-  printUserInfo(2, "Test")
-  user8Test()
-  user9Test()
+  functionTest()
+  printCalcResult(10, 20, {num1, num2 -> num1 + num2})
+  // 一番うしろの引数に関数リテラルを渡す場合には()の外に書ける
+  printCalcResult(10, 20) { num1, num2 -> num1 * num2 }
+  printCalcResultV2(10, 20) { num1, num2 -> num1 * num2 }
 }
 
 /**
@@ -218,4 +219,57 @@ data class User9(val id: Int, val name: String = "Default name", val age: Int)
 fun user9Test() {
   val user = User9(id = 1, age = 25)
   println(user.toString())
+}
+
+/**
+ * 関数型
+ * Int型の引数を2つ受け取りInt型の戻り値を返す
+ * 戻り値がない場合にはUnit型を返す
+ * 関数を値として書くのを関数リテラル
+ *
+ */
+fun functionTest() {
+  val calc: (Int, Int) -> Int = {num1: Int, num2: Int -> num1 + num2}
+  println(calc(10, 5))
+
+  //  関数リテラルは型推論が効くので型を省略できる
+  val calcV2: (Int, Int) -> Int = {num1, num2 -> num1 + num2}
+  println(calcV2(10, 5))
+
+  // 引数が1つなら引数名も省略できる
+  // その場合には暗黙的にitが使われる
+  val squared: (Int) -> Int = { it * it }
+  println(squared(2))
+
+  // Anonymous functions 無名関数
+  val squaredV2: (Int) -> Int = fun (num: Int): Int {return num * num}
+  println(squaredV2(2))
+}
+
+/**
+ * Higher-order functions
+ *
+ *高階関数は関数型のオブジェクトを引数に受け取る関数
+ *
+ * @param num1
+ * @param num2
+ * @param calc
+ */
+fun printCalcResult(num1: Int, num2: Int, calc: (Int, Int) -> Int) {
+  val result = calc(num1, num2)
+  println(result)
+}
+
+/**
+ * Type aliases
+ *
+ * タイプエイリアスは関数型を使い回すときに有用
+ * 関数型に名前をつけておけるからあとは使うときに呼び出せばいい
+ *
+ */
+typealias Calc = (Int, Int) -> Int
+
+fun printCalcResultV2(num1: Int, num2: Int, calc: Calc) {
+  val result = calc(num1, num2)
+  println(result)
 }
