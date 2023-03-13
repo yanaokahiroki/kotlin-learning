@@ -1,5 +1,8 @@
 fun main() {
-  dataClass()
+  printUserInfo(1)
+  printUserInfo(2, "Test")
+  user8Test()
+  user9Test()
 }
 
 /**
@@ -172,4 +175,47 @@ fun dataClass() {
   val user = User7(2, "Test")
   val copyUser = user.copy(id = 3, name = "Copied")
   println(copyUser.toString())
+}
+
+/**
+ * Default arguments
+ *
+ * 関数にデフォルト引数を設定できる
+ * デフォルト引数は呼び出し時にその引数が省略された場合にデフォルトで使用される
+ *
+ * @param id ID
+ * @param name 名前
+ */
+fun printUserInfo(id: Int, name: String = "Default name"){
+  println("id=$id name=$name")
+}
+
+/**
+ * デフォルト引数はコンストラクタにも使用できる
+ *
+ * @property id ID
+ * @property name 名前
+ */
+data class User8(val id: Int, val name: String = "Default name")
+
+fun user8Test() {
+  val user = User8(1)
+  println(user.toString())
+}
+
+/**
+ * Named arguments
+ *
+ * 2番目の引数nameだけを省略して呼び出す
+ * プロパティ名 = 値という形式で呼び出す
+ *
+ * @property id ID
+ * @property name 名前
+ * @property age 年齢
+ */
+data class User9(val id: Int, val name: String = "Default name", val age: Int)
+
+fun user9Test() {
+  val user = User9(id = 1, age = 25)
+  println(user.toString())
 }
