@@ -1,5 +1,6 @@
 fun main() {
-  println(2.square())
+  withExample()
+  runExample()
 }
 
 /**
@@ -278,3 +279,48 @@ fun printCalcResultV2(num1: Int, num2: Int, calc: Calc) {
  * @return
  */
 fun Int.square(): Int = this *  this
+
+/**
+ * Scope functions
+ * スコープ関数
+ *
+ * with：複数の処理をまとめて行う
+ * 第1引数はレシーバーとなるオブジェクト(レシーバーオブジェクト)、第2引数はレシーバーのオブジェクトを処理し任意の型を返す関数を渡す
+ *
+ * この例では
+ */
+fun withExample() {
+  val list = mutableListOf<Int>()
+  for (i in 1..10) {
+    if (i % 2 == 1) list.add(i)
+  }
+  // joinToStingでListなどのコレクション要素を指定の文字列をseparatorのして文字列にする
+  val oddNumbers = list.joinToString(separator = " ")
+  println(oddNumbers)
+
+  val oddNumbersWith = with(mutableListOf<Int>()) {
+    for (i in 1..10) {
+      if (i % 2 == 1) this.add(i)
+    }
+    this.joinToString(separator = " ")
+  }
+  println(oddNumbersWith)
+}
+
+/**
+ * Scope functions
+ * スコープ関数
+ *
+ * run：withに似ている、レシーバーオブジェクトを引数に取るのではなくレシーバーオブジェクトに対しての拡張関数として実装する
+ *
+ */
+fun runExample() {
+  val oddNumbers = mutableListOf<Int>().run {
+    for (i in 1..10) {
+      if (i % 2 == 1) this.add(i)
+    }
+    this.joinToString(separator = " ")
+  }
+
+  println(oddNumbers)
+}
