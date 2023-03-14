@@ -1,9 +1,5 @@
 fun main() {
-  functionTest()
-  printCalcResult(10, 20, {num1, num2 -> num1 + num2})
-  // 一番うしろの引数に関数リテラルを渡す場合には()の外に書ける
-  printCalcResult(10, 20) { num1, num2 -> num1 * num2 }
-  printCalcResultV2(10, 20) { num1, num2 -> num1 * num2 }
+  println(2.square())
 }
 
 /**
@@ -273,3 +269,12 @@ fun printCalcResultV2(num1: Int, num2: Int, calc: Calc) {
   val result = calc(num1, num2)
   println(result)
 }
+
+/**
+ * Extension functions
+ *
+ * 拡張関数は既存のクラスに関数を追加したかのような処理を記述できる
+ *
+ * @return
+ */
+fun Int.square(): Int = this *  this
