@@ -1,6 +1,5 @@
 fun main() {
-  withExample()
-  runExample()
+  letExample()
 }
 
 /**
@@ -9,7 +8,7 @@ fun main() {
  * @param num 数値
  */
 fun printOddOrEvenNumberText(num: Int) {
-  val text = if (num % 2 ==1) {
+  val text = if (num % 2 == 1) {
     "奇数"
   } else {
     "偶数"
@@ -25,7 +24,7 @@ fun printOddOrEvenNumberText(num: Int) {
  * @param num 数値
  */
 fun printOddOrEvenNumberTextSimpler(num: Int) {
-  val text = if (num % 2 ==1) "奇数" else "偶数"
+  val text = if (num % 2 == 1) "奇数" else "偶数"
   println(text)
 }
 
@@ -76,7 +75,7 @@ class User1 {
  * @param id ID
  */
 class User2(id: Int) {
-  val id:Int = id
+  val id: Int = id
   var name: String = ""
 }
 
@@ -124,7 +123,7 @@ class User4 {
     get() = name != ""
 }
 
-fun user(){
+fun user() {
   val user = User1()
   user.name = "Test"
   println(user.name)
@@ -184,7 +183,7 @@ fun dataClass() {
  * @param id ID
  * @param name 名前
  */
-fun printUserInfo(id: Int, name: String = "Default name"){
+fun printUserInfo(id: Int, name: String = "Default name") {
   println("id=$id name=$name")
 }
 
@@ -226,11 +225,11 @@ fun user9Test() {
  *
  */
 fun functionTest() {
-  val calc: (Int, Int) -> Int = {num1: Int, num2: Int -> num1 + num2}
+  val calc: (Int, Int) -> Int = { num1: Int, num2: Int -> num1 + num2 }
   println(calc(10, 5))
 
   //  関数リテラルは型推論が効くので型を省略できる
-  val calcV2: (Int, Int) -> Int = {num1, num2 -> num1 + num2}
+  val calcV2: (Int, Int) -> Int = { num1, num2 -> num1 + num2 }
   println(calcV2(10, 5))
 
   // 引数が1つなら引数名も省略できる
@@ -239,7 +238,7 @@ fun functionTest() {
   println(squared(2))
 
   // Anonymous functions 無名関数
-  val squaredV2: (Int) -> Int = fun (num: Int): Int {return num * num}
+  val squaredV2: (Int) -> Int = fun(num: Int): Int { return num * num }
   println(squaredV2(2))
 }
 
@@ -278,7 +277,7 @@ fun printCalcResultV2(num1: Int, num2: Int, calc: Calc) {
  *
  * @return
  */
-fun Int.square(): Int = this *  this
+fun Int.square(): Int = this * this
 
 /**
  * Scope functions
@@ -323,4 +322,38 @@ fun runExample() {
   }
 
   println(oddNumbers)
+}
+
+/**
+ * Scope functions
+ * スコープ関数
+ *
+ * let：Nullableなオブジェクトに名前をつけて処理する
+ * runの処理を書き換えることができる
+ * JavaのStreamでの書き方と同じ
+ *
+ */
+fun letExample() {
+  val oddNumbers = mutableListOf<Int>().let { list ->
+    for (i in 1..10) {
+      if (i % 2 == 1) list.add(i)
+    }
+    list.joinToString(separator = " ")
+  }
+
+  println(oddNumbers)
+}
+
+data class User10(val name: String)
+
+/**
+ * よく使うのはNullableのオブジェクトに対して処理する
+ *
+ * @param name 名前
+ * @return User10のインスタンス
+ */
+fun createUser(name: String?): User10? {
+  // itという暗黙の名前でレシーバーを扱うこともできる
+  return name?.let { User10(it) }
+//  return name?.let { userName -> User10(userName) }
 }
