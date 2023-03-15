@@ -1,5 +1,6 @@
 fun main() {
   updateUser(100, "UpdatedName", "UpdatedAddress")
+  updateUserAlso(100, "UpdatedName", "UpdatedAddress")
 }
 
 /**
@@ -392,6 +393,27 @@ fun updateUser(id: Int, newName: String, newAddress: String) {
   val user = getUser(id).apply {
     this.name = newName
     this.address = newAddress
+  }
+  println(user)
+}
+
+/**
+ * Scope functions
+ * スコープ関数
+ *
+ * also：オブジェクトに変更を加えて返す
+ * applyと違いレシーバーオブジェクトであるUser11のインスタンスに名前をつけて処理する
+ * Javaでおなじみ
+ * 名前をつけずitという暗黙の名前も使える
+ *
+ * @param id ID
+ * @param newName 更新後の名前
+ * @param newAddress 更新後の住所
+ */
+fun updateUserAlso(id: Int, newName: String, newAddress: String) {
+  val user = getUser(id).also { u ->
+    u.name = newName
+    u.address = newAddress
   }
   println(user)
 }
