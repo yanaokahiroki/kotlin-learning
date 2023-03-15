@@ -1,5 +1,5 @@
 fun main() {
-  letExample()
+  updateUser(100, "UpdatedName", "UpdatedAddress")
 }
 
 /**
@@ -356,4 +356,42 @@ fun createUser(name: String?): User10? {
   // itという暗黙の名前でレシーバーを扱うこともできる
   return name?.let { User10(it) }
 //  return name?.let { userName -> User10(userName) }
+}
+
+/**
+ * Scope functions
+ * スコープ関数
+ *
+ * apply：レシーバーオブジェクトそのものを戻り値として返す
+ * 取得したオブジェクトになにか処理や更新をした上でそのオブジェクトを返すような処理ができる
+ *
+ */
+fun applyExample() {
+  val oddNumbers = mutableListOf<Int>().apply {
+    for (i in 1..10) {
+      if (i % 2 == 1) this.add(i)
+    }
+    this.joinToString(separator = " ")
+  }
+
+  // applyがオブジェクトを返す
+  // [1, 3, 5, 7, 9]
+  println(oddNumbers)
+}
+
+
+data class User11(val id: Int, var name: String, var address: String)
+
+fun getUser(id: Int): User11 {
+  val user = User11(id, "Test11", "Chiba")
+  println(user) // User11(id=100, name="Test11", address="Chiba")
+  return user
+}
+
+fun updateUser(id: Int, newName: String, newAddress: String) {
+  val user = getUser(id).apply {
+    this.name = newName
+    this.address = newAddress
+  }
+  println(user)
 }
