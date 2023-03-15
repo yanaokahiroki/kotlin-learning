@@ -1,6 +1,5 @@
 fun main() {
-  updateUser(100, "UpdatedName", "UpdatedAddress")
-  updateUserAlso(100, "UpdatedName", "UpdatedAddress")
+  operatorExample()
 }
 
 /**
@@ -416,4 +415,44 @@ fun updateUserAlso(id: Int, newName: String, newAddress: String) {
     u.address = newAddress
   }
   println(user)
+}
+
+/**
+ * Operator overloading
+ *
+ * 演算子オーバーロードという機能で演算子を使用した際の処理を実装できる
+ * 下記の演算子に対応する名前で関数を作る
+ * +：plus
+ * -：minus
+ * *：times
+ * /：div
+ *
+ * 四則演算に限らず比較演算子でも同様のオーバーロードができる
+ *
+ * @property value
+ */
+data class Num(val value: Int) {
+  /**
+   * +を使用した際の処理
+   */
+  operator fun plus(num: Num): Num {
+    return Num(value + num.value)
+  }
+
+  /**
+   * <>を使用した処理
+   */
+  operator fun compareTo(num: Num): Int {
+    return value.compareTo(num.value)
+  }
+}
+
+fun operatorExample() {
+  val num = Num(5) + Num(1)
+  println(num)
+
+  val greaterThan = Num(5) > Num(1)
+  val lessThan = Num(5) < Num(1)
+  println(greaterThan)
+  println(lessThan)
 }
