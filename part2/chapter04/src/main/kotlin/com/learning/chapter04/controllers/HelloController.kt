@@ -1,4 +1,4 @@
-package com.learning.chapter04
+package com.learning.chapter04.controllers
 
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
