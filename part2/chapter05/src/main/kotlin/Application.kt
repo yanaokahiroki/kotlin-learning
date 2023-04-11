@@ -1,10 +1,7 @@
-import database.UsersDynamicSqlSupport
-import database.UsersMapper
-import database.select
-import database.selectByPrimaryKey
+import database.*
 
 fun main() {
-  selectWhereExample2()
+  selectCountExample2()
 }
 
 fun selectExample() {
@@ -41,5 +38,29 @@ fun selectWhereExample2() {
     }
 
     println(userList)
+  }
+}
+
+fun selectCountExample() {
+  val sqlSession = MybatisFactory().createMybatisSessionFactory().openSession()
+
+  sqlSession.use {
+    val mapper = it.getMapper(UsersMapper::class.java)
+    val userCount = mapper.count {
+      where { UsersDynamicSqlSupport.users.age isGreaterThanOrEqualTo 25 }
+    }
+
+    println(userCount)
+  }
+}
+
+fun selectCountExample2() {
+  val sqlSession = MybatisFactory().createMybatisSessionFactory().openSession()
+
+  sqlSession.use {
+    val mapper = it.getMapper(UsersMapper::class.java)
+    val userCount = mapper.count{ allRows() }
+
+    println(userCount)
   }
 }

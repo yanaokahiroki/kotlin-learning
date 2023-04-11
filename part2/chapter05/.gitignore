@@ -2,7 +2,7 @@
 ./chapter02.iml
 mysql/data
 
-.gradle
+.gradle/
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
