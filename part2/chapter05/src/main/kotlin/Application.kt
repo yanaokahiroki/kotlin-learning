@@ -4,7 +4,7 @@ import database.select
 import database.selectByPrimaryKey
 
 fun main() {
-  selectWhereExample()
+  selectWhereExample2()
 }
 
 fun selectExample() {
@@ -25,6 +25,19 @@ fun selectWhereExample() {
     val mapper = it.getMapper(UsersMapper::class.java)
     val userList = mapper.select{
       where {UsersDynamicSqlSupport.users.name isEqualTo  "Saburo"}
+    }
+
+    println(userList)
+  }
+}
+
+fun selectWhereExample2() {
+  val sqlSession = MybatisFactory().createMybatisSessionFactory().openSession()
+
+  sqlSession.use {
+    val mapper = it.getMapper(UsersMapper::class.java)
+    val userList = mapper.select {
+      where { UsersDynamicSqlSupport.users.age isGreaterThanOrEqualTo 25 }
     }
 
     println(userList)
