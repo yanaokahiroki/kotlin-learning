@@ -1,7 +1,7 @@
 import database.*
 
 fun main() {
-  selectCountExample2()
+  multipleInsertExample()
 }
 
 fun selectExample() {
@@ -62,5 +62,31 @@ fun selectCountExample2() {
     val userCount = mapper.count{ allRows() }
 
     println(userCount)
+  }
+}
+
+fun insertExample() {
+  val sqlSession = MybatisFactory().createMybatisSessionFactory().openSession()
+
+  sqlSession.use {
+    val mapper = it.getMapper(UsersMapper::class.java)
+    val user = Users(103, "Shiro", 18, "Hello")
+    val count = mapper.insert(user)
+    it.commit()
+    println(count)
+  }
+}
+
+fun multipleInsertExample() {
+  val sqlSession = MybatisFactory().createMybatisSessionFactory().openSession()
+
+  sqlSession.use {
+    val mapper = it.getMapper(UsersMapper::class.java)
+    val user1 = Users(104, "Shiro", 18, "Hello")
+    val user2 = Users(105, "Shiro", 18, "Hello")
+    val user3 = Users(106, "Shiro", 18, "Hello")
+    val count = mapper.insertMultiple(user1, user2, user3)
+    it.commit()
+    println(count)
   }
 }
