@@ -1,0 +1,25 @@
+services:
+  mysql:
+    image: mysql:8.0.32
+    platform: linux/amd64
+    container_name: "mysql"
+    hostname: "mysql"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: "kotlin"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      TZ: "Asia/Tokyo"
+    volumes:
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d
+    cap_add:
+      - SYS_NICE
+    tty: true
+    networks:
+      - container-network
+
+networks:
+  container-network:
+    driver: bridge
