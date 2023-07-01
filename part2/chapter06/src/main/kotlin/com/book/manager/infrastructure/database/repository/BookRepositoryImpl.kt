@@ -6,6 +6,7 @@ import com.book.manager.domain.model.Rental
 import com.book.manager.domain.repository.BookRepository
 import com.book.manager.infrastructure.database.mapper.BookWithRentalMapper
 import com.book.manager.infrastructure.database.mapper.select
+import com.book.manager.infrastructure.database.mapper.selectByPrimaryKey
 import com.book.manager.infrastructure.database.record.BookWithRentalRecord
 import org.springframework.stereotype.Repository
 
@@ -15,6 +16,9 @@ class BookRepositoryImpl(
 ) : BookRepository {
   override fun findAllWithRental(): List<BookWithRental> =
     bookWithRentalMapper.select().map { toBookWithRental(it) }
+
+  override fun findWithRental(id: Long): BookWithRental? =
+    bookWithRentalMapper.selectByPrimaryKey(id)?.let { toBookWithRental(it) }
 
   /**
    * BookWithRentalRecordをBookWithRentalに変換する

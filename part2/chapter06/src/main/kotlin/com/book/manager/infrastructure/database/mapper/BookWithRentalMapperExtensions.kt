@@ -9,7 +9,7 @@ import com.book.manager.infrastructure.database.mapper.RentalsDynamicSqlSupport.
 import com.book.manager.infrastructure.database.mapper.RentalsDynamicSqlSupport.returnDeadline
 import com.book.manager.infrastructure.database.mapper.RentalsDynamicSqlSupport.userId
 import com.book.manager.infrastructure.database.record.BookWithRentalRecord
-import org.mybatis.dynamic.sql.util.kotlin.spring.select
+import org.mybatis.dynamic.sql.util.kotlin.mybatis3.select
 
 private val columnList = listOf(
   id,
@@ -30,4 +30,16 @@ fun BookWithRentalMapper.select(): List<BookWithRentalRecord> {
   }
 
   return selectMany(selectStatement)
+}
+
+fun BookWithRentalMapper.selectByPrimaryKey(id_: Long): BookWithRentalRecord? {
+  val selectStatement = select(columnList) {
+    from(BooksDynamicSqlSupport.books, "b")
+    leftJoin(RentalsDynamicSqlSupport.rentals, "r") {
+      on(id) equalTo bookId
+    }
+    where { id isEqualTo id_ }
+  }
+
+  return selectOne(selectStatement)
 }
