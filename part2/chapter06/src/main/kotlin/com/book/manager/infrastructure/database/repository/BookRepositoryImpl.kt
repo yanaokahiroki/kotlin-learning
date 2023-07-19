@@ -5,14 +5,18 @@ import com.book.manager.domain.model.BookWithRental
 import com.book.manager.domain.model.Rental
 import com.book.manager.domain.repository.BookRepository
 import com.book.manager.infrastructure.database.mapper.BookWithRentalMapper
+import com.book.manager.infrastructure.database.mapper.BooksMapper
+import com.book.manager.infrastructure.database.mapper.insert
 import com.book.manager.infrastructure.database.mapper.select
 import com.book.manager.infrastructure.database.mapper.selectByPrimaryKey
 import com.book.manager.infrastructure.database.record.BookWithRentalRecord
+import com.book.manager.infrastructure.database.record.Books
 import org.springframework.stereotype.Repository
 
 @Repository
 class BookRepositoryImpl(
-  private val bookWithRentalMapper: BookWithRentalMapper
+  private val bookWithRentalMapper: BookWithRentalMapper,
+  private val booksMapper: BooksMapper
 ) : BookRepository {
   override fun findAllWithRental(): List<BookWithRental> =
     bookWithRentalMapper.select().map { toBookWithRental(it) }
@@ -45,4 +49,15 @@ class BookRepositoryImpl(
 
     return BookWithRental(book, rental)
   }
+
+  override fun register(book: Book): Int =
+    booksMapper.insert(toRecord(book))
+
+  private fun toRecord(book: Book): Books =
+    Books(
+      id = book.id,
+      title = book.title,
+      author = book.author,
+      releaseDate = book.releaseDate
+    )
 }
