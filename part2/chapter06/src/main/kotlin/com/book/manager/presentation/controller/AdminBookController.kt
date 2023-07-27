@@ -3,6 +3,7 @@ package com.book.manager.presentation.controller
 import com.book.manager.application.service.AdminBookService
 import com.book.manager.domain.model.Book
 import com.book.manager.presentation.form.RegisterBookRequest
+import com.book.manager.presentation.form.UpdateBookRequest
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -23,6 +24,16 @@ class AdminBookController(private val adminBookService: AdminBookService) {
         author = request.author,
         releaseDate = request.releaseDate
       )
+    )
+  }
+
+  @PostMapping("/update")
+  fun updateBook(@RequestBody request: UpdateBookRequest) {
+    adminBookService.updateBook(
+      request.id,
+      request.title,
+      request.author,
+      request.releaseDate
     )
   }
 }
