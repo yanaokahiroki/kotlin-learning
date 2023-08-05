@@ -25,4 +25,12 @@ class AdminBookService(private val bookRepository: BookRepository) {
 
     bookRepository.update(id, title, author, releaseDate)
   }
+
+  @Transactional
+  fun deleteBook(id: Long) {
+    bookRepository.findWithRental(id)
+      ?: throw IllegalArgumentException("Book not found. id: $id")
+
+    bookRepository.delete(id)
+  }
 }

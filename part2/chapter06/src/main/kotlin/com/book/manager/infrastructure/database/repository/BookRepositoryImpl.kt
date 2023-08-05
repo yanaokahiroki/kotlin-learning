@@ -68,4 +68,8 @@ class BookRepositoryImpl(
       author = book.author,
       releaseDate = book.releaseDate
     )
+
+  override fun delete(id: Long) {
+    booksMapper.deleteByPrimaryKey(id)
+  }
 }
