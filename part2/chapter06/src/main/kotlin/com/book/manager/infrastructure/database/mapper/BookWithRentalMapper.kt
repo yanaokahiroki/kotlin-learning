@@ -10,8 +10,17 @@ import org.apache.ibatis.type.JdbcType
 import org.mybatis.dynamic.sql.select.render.SelectStatementProvider
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter
 
+/**
+ * 書籍と貸出情報のマッパー
+ */
 @Mapper
 interface BookWithRentalMapper {
+  /**
+   * 書籍と貸出情報の一覧を取得する
+   *
+   * @param selectStatement SQL
+   * @return 書籍と貸出情報の一覧
+   */
   @SelectProvider(type = SqlProviderAdapter::class, method = "select")
   @Results(
     id = "BookWithRentalRecordResult", value = [
@@ -26,6 +35,12 @@ interface BookWithRentalMapper {
   )
   fun selectMany(selectStatement: SelectStatementProvider): List<BookWithRentalRecord>
 
+  /**
+   * 書籍と貸出情報を取得する
+   *
+   * @param selectStatement SQL
+   * @return 書籍と貸出情報
+   */
   @SelectProvider(type = SqlProviderAdapter::class, method = "select")
   @ResultMap("BookWithRentalRecordResult")
   fun selectOne(selectStatement: SelectStatementProvider): BookWithRentalRecord?

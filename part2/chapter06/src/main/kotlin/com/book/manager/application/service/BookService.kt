@@ -4,6 +4,9 @@ import com.book.manager.domain.model.BookWithRental
 import com.book.manager.domain.repository.BookRepository
 import org.springframework.stereotype.Service
 
+/**
+ * 書籍サービス
+ */
 @Service
 class BookService(
   private val bookRepository: BookRepository

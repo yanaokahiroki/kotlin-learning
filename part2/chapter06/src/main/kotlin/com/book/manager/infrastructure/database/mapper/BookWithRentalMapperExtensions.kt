@@ -21,6 +21,12 @@ private val columnList = listOf(
   returnDeadline
 )
 
+
+/**
+ * 書籍と貸出情報の一覧を取得する
+ *
+ * @return 書籍と貸出情報の一覧
+ */
 fun BookWithRentalMapper.select(): List<BookWithRentalRecord> {
   val selectStatement = select(columnList) {
     from(BooksDynamicSqlSupport.books, "b")
@@ -32,6 +38,12 @@ fun BookWithRentalMapper.select(): List<BookWithRentalRecord> {
   return selectMany(selectStatement)
 }
 
+/**
+ * 書籍と貸出情報を取得する
+ *
+ * @param id_ 書籍ID
+ * @return 書籍と貸出情報
+ */
 fun BookWithRentalMapper.selectByPrimaryKey(id_: Long): BookWithRentalRecord? {
   val selectStatement = select(columnList) {
     from(BooksDynamicSqlSupport.books, "b")

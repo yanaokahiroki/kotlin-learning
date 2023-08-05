@@ -5,10 +5,23 @@ import com.book.manager.domain.model.Rental
 import java.time.LocalDate
 import java.time.LocalDateTime
 
+/**
+ * 書籍一覧取得レスポンス
+ *
+ * @property bookList 書籍リスト
+ */
 data class GetBookListResponse(
   val bookList: List<BookInfo>
 )
 
+/**
+ * 書籍情報
+ *
+ * @property id 書籍ID
+ * @property title 書籍名
+ * @property author 著者名
+ * @property isRental 貸出中かどうか
+ */
 data class BookInfo(
   val id: Long,
   val title: String,
@@ -23,6 +36,15 @@ data class BookInfo(
   )
 }
 
+/**
+ * 書籍取得レスポンス
+ *
+ * @property id 書籍ID
+ * @property title 書籍名
+ * @property author 著者名
+ * @property releaseDate 発売日
+ * @property rentalInfo 貸出情報
+ */
 data class GetBookResponse(
   val id: Long,
   val title: String,
@@ -39,6 +61,13 @@ data class GetBookResponse(
   )
 }
 
+/**
+ * 貸出情報
+ *
+ * @property userId ユーザーID
+ * @property rentalDatetime 貸出日時
+ * @property returnDeadline 返却期限
+ */
 data class RentalInfo(
   val userId: Long,
   val rentalDatetime: LocalDateTime,
@@ -51,6 +80,14 @@ data class RentalInfo(
   )
 }
 
+/**
+ * 書籍登録リクエスト
+ *
+ * @property id 書籍ID
+ * @property title 書籍名
+ * @property author 著者名
+ * @property releaseDate 発売日
+ */
 data class RegisterBookRequest(
   val id: Long,
   val title: String,
@@ -58,6 +95,14 @@ data class RegisterBookRequest(
   val releaseDate: LocalDate
 )
 
+/**
+ * 書籍更新リクエスト
+ *
+ * @property id 書籍ID
+ * @property title 書籍名
+ * @property author 著者名
+ * @property releaseDate 発売日
+ */
 data class UpdateBookRequest(
   val id: Long,
   val title: String?,

@@ -10,6 +10,9 @@ import com.book.manager.infrastructure.database.record.Books
 import org.springframework.stereotype.Repository
 import java.time.LocalDate
 
+/**
+ * 書籍リポジトリの実装クラス
+ */
 @Repository
 class BookRepositoryImpl(
   private val bookWithRentalMapper: BookWithRentalMapper,
@@ -61,6 +64,12 @@ class BookRepositoryImpl(
     )
   }
 
+  /**
+   * BookをBooksに変換する
+   *
+   * @param book Book
+   * @return Books
+   */
   private fun toRecord(book: Book): Books =
     Books(
       id = book.id,

@@ -12,11 +12,19 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
+/**
+ * 管理者用書籍コントローラー
+ */
 @RestController
 @RequestMapping("admin/books")
 @CrossOrigin(origins = ["http://localhost:8081"], allowCredentials = "true")
 class AdminBookController(private val adminBookService: AdminBookService) {
 
+  /**
+   * 書籍を登録する
+   *
+   * @param request 登録する書籍情報
+   */
   @PostMapping("/register")
   fun registerBook(@RequestBody request: RegisterBookRequest) {
     adminBookService.registerBook(
@@ -29,6 +37,11 @@ class AdminBookController(private val adminBookService: AdminBookService) {
     )
   }
 
+  /**
+   * 書籍を更新する
+   *
+   * @param request 更新する書籍情報
+   */
   @PostMapping("/update")
   fun updateBook(@RequestBody request: UpdateBookRequest) {
     adminBookService.updateBook(
@@ -39,6 +52,11 @@ class AdminBookController(private val adminBookService: AdminBookService) {
     )
   }
 
+  /**
+   * 書籍を削除する
+   *
+   * @param bookId 書籍ID
+   */
   @DeleteMapping("/delete/{book_id}")
   fun deleteBook(@PathVariable("book_id") bookId: Long) {
     adminBookService.deleteBook(bookId)
