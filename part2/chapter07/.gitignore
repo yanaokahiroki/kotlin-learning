@@ -1,6 +1,7 @@
 .DS_Store
 ./chapter07.iml
 mysql/data
+redis/data
 
 .gradle/
 build/

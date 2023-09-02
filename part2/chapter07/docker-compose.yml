@@ -19,6 +19,17 @@ services:
     tty: true
     networks:
       - container-network
+  redis:
+    image: redis:latest
+    platform: linux/amd64
+    container_name: "redis"
+    hostname: "redis"
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/data:/data
+    networks:
+      - container-network
 
 networks:
   container-network:
