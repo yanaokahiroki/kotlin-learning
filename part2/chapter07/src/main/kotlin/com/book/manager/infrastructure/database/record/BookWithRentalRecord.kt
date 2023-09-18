@@ -10,5 +10,5 @@ data class BookWithRentalRecord (
   val releaseDate: LocalDate? = null,
   val userId: Long? = null,
   val rentalDatetime: LocalDateTime? = null,
-  val rentalDeadline: LocalDateTime? = null
+  val returnDeadline: LocalDateTime? = null
 )

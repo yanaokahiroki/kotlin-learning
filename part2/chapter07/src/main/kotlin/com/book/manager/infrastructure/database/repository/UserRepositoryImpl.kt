@@ -4,6 +4,7 @@ import com.book.manager.domain.model.User
 import com.book.manager.domain.repository.UserRepository
 import com.book.manager.infrastructure.database.mapper.UsersDynamicSqlSupport
 import com.book.manager.infrastructure.database.mapper.UsersMapper
+import com.book.manager.infrastructure.database.mapper.selectByPrimaryKey
 import com.book.manager.infrastructure.database.mapper.selectOne
 import com.book.manager.infrastructure.database.record.Users
 import org.springframework.stereotype.Repository
@@ -26,6 +27,11 @@ class UserRepositoryImpl(private val usersMapper: UsersMapper) : UserRepository 
     return record?.let {
       toModel(it)
     }
+  }
+
+  override fun findByUserId(userId: Long): User? {
+    val record = usersMapper.selectByPrimaryKey(userId)
+    return record?.let { toModel(it) }
   }
 
   /**

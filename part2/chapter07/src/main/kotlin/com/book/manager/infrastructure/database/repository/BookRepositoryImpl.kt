@@ -43,7 +43,7 @@ class BookRepositoryImpl(
         bookId = record.id,
         userId = record.userId,
         rentalDatetime = record.rentalDatetime ?: throw IllegalStateException("rentalDatetime must not be null"),
-        returnDeadline = record.rentalDeadline ?: throw IllegalStateException("rentalDeadline must not be null")
+        returnDeadline = record.returnDeadline ?: throw IllegalStateException("rentalDeadline must not be null")
       )
     }
 
